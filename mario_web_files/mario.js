@@ -112,33 +112,41 @@ function draw() {
         // The user wants Mario to jump:
         if (keycode === 13 && Mario.moving == "no") {
             Mario.timer = setInterval(render, Mario.timerInterval);
-        } else if (keycode == 37 && Mario.moving == "no") {
+        }
+        if (keycode == 37 && Mario.x > 10 && Mario.moving == "no") {
+            Mario.x -= 30;
+            Mario.Image.src = "marioturnsleft.png";
             ctx.drawImage(bgImage, 0, 0);
-            ctx.drawImage(marioLeft, 100, 615, 50, 80);
-            document.body.onkeyup = function() {
-                ctx.drawImage(bgImage, 0, 0);
-                ctx.drawImage(mario, 100, 615, 50, 80);
-			}
-        } else if (keycode == 39 && Mario.moving == "no") {
+            ctx.drawImage(Mario.Image, Mario.x, Mario.y, Mario.w, Mario.h);
+        }
+        if (keycode == 39 && Mario.x < 1125 && Mario.moving == "no") {
+            Mario.x += 30;
+            Mario.Image.src = "marioturnsright.png";
             ctx.drawImage(bgImage, 0, 0);
-            ctx.drawImage(marioRight, 100, 615, 50, 80);
-            document.body.onkeyup = function() {
-                ctx.drawImage(bgImage, 0, 0);
-                ctx.drawImage(mario, 100, 615, 50, 80);
-            }
-		}
-
-
-
-
+            ctx.drawImage(Mario.Image, Mario.x, Mario.y, Mario.w, Mario.h);
+        }
     }
+
+
 
     /*
      * TODO: Capture keycodes for L and R. In each, set a timeout that calls a function
      * TODO: to face Mario forward after 200 ms. HINT: setTimeout(function, timeInMilliSecs)
      */
     document.body.onkeyup = function(e) {  // listen for a key
-    	setTimeout (faceForward(), 200);
+        var keycode = e.keyCode;
+        console.log(keycode);
+
+        if (keycode === 37) {
+            setTimeout(faceForward,200); {
+            }
+
+        } else if (keycode === 39) {
+            setTimeout(faceForward,200);{
+
+            }
+
+        }
     }
 
 
@@ -146,8 +154,9 @@ function draw() {
      * TODO: Face Mario forward. Do not forget to draw the background image first
      */
     function faceForward() {
+        Mario.Image.src="mario1.png";
         ctx.drawImage(bgImage, 0, 0);
-        ctx.drawImage(mario, 100, 615, 50, 80);
+        ctx.drawImage(Mario.Image, Mario.x, Mario.y, Mario.w, Mario.h);
     }
 	
 } // close draw() 
